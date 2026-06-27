@@ -5,6 +5,12 @@ import pandas as pd
 
 app = FastAPI(title="AirQ IA Microservice")
 
+# Render usa esto para verificar si el servidor está vivo y sano
+@app.get("/")
+@app.head("/")
+def health_check():
+    return {"status": "ok", "message": "ML Service is running"}
+
 # 1. Cargar el cerebro empaquetado al iniciar el servidor
 try:
     model = joblib.load('airq_universal_model.pkl')
